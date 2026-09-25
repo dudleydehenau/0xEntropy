@@ -63,7 +63,7 @@ A custom 3D enclosure was designed to house the main board, the touchscreen disp
 </table>
 
 <p align="center">
-  <img src="./assets/printing_timelapse.gif" alt="3D Printing Timelapse" width="600">
+  <img src="./assets/Timelapse.gif" alt="3D Printing Timelapse" width="600">
   <br>
   <em>Enclosure 3D printing timelapse</em>
 </p>
