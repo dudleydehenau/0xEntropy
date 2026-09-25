@@ -62,6 +62,12 @@ A custom 3D enclosure was designed to house the main board, the touchscreen disp
   </tr>
 </table>
 
+<p align="center">
+  <img src="./assets/printing_timelapse.gif" alt="3D Printing Timelapse" width="600">
+  <br>
+  <em>Enclosure 3D printing timelapse</em>
+</p>
+
 *(F3D / STEP source files are available in the `/file3D` directory)*
 
 ---
