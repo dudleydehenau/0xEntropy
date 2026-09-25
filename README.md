@@ -1,160 +1,160 @@
 <h1 align="center">0xEntropy</h1>
 
 <p align="center">
-  <img src="./assets/0xEntropy.png" alt="Rendu 3D du PCB" width="100%">
+  <img src="./assets/0xEntropy.png" alt="PCB 3D Render" width="100%">
 </p>
 
 <p align="center">
-  <em>Générateur physique de nombres aléatoires (TRNG) compact, open-source et alimenté en USB, basé sur le bruit d'avalanche d'une diode Zener et propulsé par un RP2040.</em>
+  <em>Compact, open-source, USB-powered True Random Number Generator (TRNG) based on Zener diode avalanche breakdown noise and powered by an RP2040.</em>
 </p>
 
 ---
 
-## En bref
+## Overview
 
-**0xEntropy** est un générateur d'entropie matérielle autonome. Il exploite le phénomène physique de claquage par avalanche d'une diode Zener pour capter un bruit quantique non-déterministe, l'amplifie, le numérise à haute vitesse via les machines d'états PIO d'un Raspberry Pi Pico, et applique un blanchiment cryptographique SHA-256 en temps réel.
+**0xEntropy** is a standalone hardware entropy generator. It harnesses the physical phenomenon of avalanche breakdown in a Zener diode to capture non-deterministic quantum noise, amplifies it, digitizes it at high speed using the Raspberry Pi Pico PIO state machines, and applies real-time SHA-256 cryptographic whitening.
 
-Le système intègre un écran de contrôle tactile, des tests de santé continus et transmet le flux aléatoire via USB.
-
----
-
-## Caractéristiques
-
-- **Source physique pure** : Bruit d'avalanche d'une diode Zener 12V polarisée en inverse, filtré et amplifié (MCP6002).
-- **Masse virtuelle filtrée ($V_{REF} = 2.5\text{V}$)** : Isolation stricte contre le bruit parasite de l'alimentation USB.
-- **Échantillonnage matériel (PIO)** : Capture haute vitesse déchargée du CPU.
-- **Architecture Multicœur (RP2040)** :
-  - **Core 0** : Interface LCD tactile (moteur de rendu bitmap 1-bit ultra-léger), gestion des statistiques et alertes. 
-  - **Core 1** : Acquisition brute, tests de santé statistiques et post-traitement SHA-256.
-- **Monitoring en direct** : Affichage temps réel de l'entropie de Shannon et supervision de l'état de la source.
-- **100% Plug & Play** : Alimenté et interrogé via un simple port USB.
+The system features an onboard touchscreen interface, continuous health monitoring, and streams random data over USB.
 
 ---
 
-## Matériel & Schémas (KiCad)
+## Features
 
-Le PCB isole la chaîne analogique sensible (Zener, ampli, comparateur) de la section numérique (RP2040, écran).
-
-### Schéma électronique
-![Schéma KiCad](./assets/Elec_Kicad.png)
-
-### Conception du PCB
-![Routage PCB KiCad](./assets/PCB_kicad.png)
+- **Pure Physical Source**: Avalanche breakdown noise from a reverse-biased 12V Zener diode, filtered and amplified (MCP6002).
+- **Filtered Virtual Ground ($V_{REF} = 2.5\text{V}$)**: Strict isolation against USB power rail noise and ripples.
+- **Hardware Sampling (PIO)**: High-speed, jitter-free capture offloaded from the CPU.
+- **Dual-Core Architecture (RP2040)**:
+  - **Core 0**: Touchscreen LCD interface (ultra-lightweight 1-bit bitmap rendering engine), statistics processing, and alerts.
+  - **Core 1**: Raw bit acquisition, real-time statistical health tests, and SHA-256 post-processing.
+- **Live Monitoring**: Real-time Shannon entropy calculation and physical source health supervision.
+- **100% Plug & Play**: Powered and queried via a standard USB port.
 
 ---
 
-## Boîtier & Intégration 3D
+## Hardware & Schematics (KiCad)
 
-Un boîtier sur mesure a été modélisé pour intégrer la carte, l'écran tactile et le port micro-USB.
+The PCB isolates the sensitive analog front-end (Zener, op-amp, comparator) from the digital domain (RP2040, screen).
+
+### Schematic
+![KiCad Schematic](./assets/Elec_Kicad.png)
+
+### PCB Layout
+![KiCad PCB Routing](./assets/PCB_Kicad.png)
+
+---
+
+## Enclosure & 3D Design
+
+A custom 3D enclosure was designed to house the main board, the touchscreen display, and provide access to the micro-USB port.
 
 <table>
   <tr>
-    <th width="50%" align="center">Modèle 3D</th>
-    <th width="50%" align="center">Prototype assemblé</th>
+    <th width="50%" align="center">3D Model</th>
+    <th width="50%" align="center">Assembled Prototype</th>
   </tr>
   <tr>
     <td align="center">
-      <img src="./assets/model_3d.png" alt="Modèle 3D" width="100%">
+      <img src="./assets/model_3d.png" alt="3D Model" width="100%">
     </td>
     <td align="center">
-      <img src="./assets/case_3d.jpg" alt="Photo boîtier" width="100%">
+      <img src="./assets/case_3d.jpg" alt="Enclosure Photo" width="100%">
     </td>
   </tr>
 </table>
 
-*(Les fichiers F3D / STEP sont disponibles dans le dossier `/file3D`)*
+*(F3D / STEP source files are available in the `/file3D` directory)*
 
 ---
 
-## Structure du Firmware
+## Firmware Structure
 
-Le firmware est développé en **C/C++** avec le Pico SDK :
+The firmware is written in **C/C++** using the Pico SDK:
 
-- `firmware/0xEntropy.c` : Point d'entrée principal, orchestration et boucle centrale.
-- `firmware/Entropy/` : Échantillonnage du signal physique et génération du flux aléatoire.
-- `firmware/Health/` : Tests de santé continus (détection de panne ou de dérive de la source).
-- `firmware/Stats/` : Calculs statistiques en temps réel sur les flux de bits.
-- `firmware/UI/` : Gestion de l'affichage et de l'interface utilisateur.
+- `firmware/0xEntropy.c`: Main entry point, orchestration, and core loop.
+- `firmware/Entropy/`: Physical signal sampling and entropy generation routines.
+- `firmware/Health/`: Continuous health monitoring (failure detection and drift detection).
+- `firmware/Stats/`: Real-time statistical computations on bitstreams.
+- `firmware/UI/`: Display drivers and user interface logic.
 
 <p align="center">
-  <img src="./assets/0xEntropy_UI_Screen.png" alt="UI Affichage" width="500">
+  <img src="./assets/0xEntropy_UI_Screen.png" alt="UI Screen" width="500">
   <br>
-  <em>Valeur fictive</em>
+  <em>Simulated values</em>
 </p>
 
 ---
 
-## Aperçu du prototype complet
+## Full Prototype Overview
 
-Vue d'ensemble du matériel assemblé : le PCB opérationnel connecté à l'écran de contrôle tactile.
+Overall view of the assembled hardware: the operational PCB connected to the touchscreen display.
 
 <p align="center">
-  <img src="./assets/pcb_finish.jpg" alt="Prototype 0xEntropy complet" width="700">
+  <img src="./assets/pcb_finish.jpg" alt="Complete 0xEntropy Prototype" width="700">
   <br>
-  <em>Carte 0xEntropy finale assemblée et connectée à son écran tactile</em>
+  <em>Final 0xEntropy board assembled and connected to its touchscreen display</em>
 </p>
 
 ---
 
-## Démarrage rapide
+## Quick Start
 
-### 1. Flasher le RP2040
-1. Télécharge la dernière version `0xEntropy.uf2` dans les [Releases](../../releases).
-2. Maintiens le bouton **BOOTSEL** du Raspberry Pi Pico et branche-le en USB.
-3. Glisse-dépose le fichier `.uf2` sur le lecteur USB.
+### 1. Flash the RP2040
+1. Download the latest `0xEntropy.uf2` binary from the [Releases](../../releases).
+2. Hold down the **BOOTSEL** button on the Raspberry Pi Pico and plug it into your computer via USB.
+3. Drag and drop the `.uf2` file onto the mounted USB storage volume.
 
-### 2. Récupérer les octets aléatoires
+### 2. Stream Random Bytes
 
-Le Pico émule un port série USB standard (CDC).
+The Pico emulates a standard USB CDC serial port.
 
-#### Option A : Via le script Python (Recommandé / Multiplateforme)
-Gère le suivi du débit en direct, la reprise en cas de coupure et fonctionne sous Windows/Linux/macOS :
+#### Option A: Using the Python Script (Recommended / Cross-platform)
+Handles real-time throughput monitoring, automatic resume on disconnect, and works on Windows, Linux, and macOS:
 
 ```bash
-# Dépendance
+# Dependency
 pip install pyserial
 
-# Capture (ex: 100 Mo)
+# Stream data (e.g., capture 100 MB)
 python collect.py -p COM4 -s 100000000 -o random.bin
 ```
 
-#### Option B : Ligne de commande directe (Linux / macOS)
+#### Option B: Direct Command Line (Linux / macOS)
 ```bash
-# Capture rapide de 1 Mo
+# Quick capture of 1 MB
 head -c 1M /dev/ttyACM0 > random.bin
 ```
 
 ---
 
-### 3. Valider la qualité de l'entropie
+### 3. Verify Entropy Quality
 
-Test rapide de la distribution avec l'outil standard `ent` :
+Quick distribution analysis using the standard `ent` tool:
 
 ```bash
 ent random.bin
 ```
 
-Tests statistiques complets avec la suite **Dieharder** :
+Comprehensive statistical test battery with **Dieharder**:
 
 ```bash
-# Lancer la batterie complète de tests (-a) sur un fichier binaire (-g 201)
+# Run the full test suite (-a) on a binary stream (-g 201)
 dieharder -a -g 201 -f random.bin
 ```
 
 ---
 
-## Performances & Validation
+## Performance & Validation
 
-Le système a été validé sur la conformité statistique à très grande échelle.
+The generator has been rigorously tested and validated for statistical randomness at scale.
 
-- **Débit moyen constaté** : **~1 300 kbps** (~162 Ko/s) transmis en continu via le port série USB (CDC).
-- **Post-traitement** : Blanchiment SHA-256 avec un ratio de compression matériel de **2:1** (512 bits bruts injectés pour 256 bits générés).
+- **Observed Throughput**: **~1,300 kbps** (~162 KB/s) continuous stream over USB CDC.
+- **Post-Processing**: SHA-256 cryptographic whitening with a **2:1** hardware compression ratio (512 raw bits consumed per 256 output bits).
 
 ---
 
-### 1. Test `ent` (Échantillon de 10 Go)
+### 1. `ent` Test (10 GB Dataset)
 
-Analyse de distribution brute réalisée sur un fichier généré de **10 Go** (`10 000 000 000 octets`) :
+Raw distribution analysis performed on a continuous **10 GB** dataset (`10,000,000,000 bytes`):
 
 ```text
 Entropy = 8.000000 bits per byte.
@@ -172,13 +172,13 @@ Serial correlation coefficient is -0.000013 (totally uncorrelated = 0.0).
 
 ---
 
-### 2. Suite de tests Dieharder (Fichier de 10 Go)
+### 2. Dieharder Test Suite (10 GB Dataset)
 
-Résultats complets de la batterie de tests **Dieharder v3.31.1** exécutée sur un flux de **10 Go** (ratio SHA-256 2:1) :
-
+Full results from the **Dieharder v3.31.1** test battery executed against a **10 GB** stream (SHA-256 2:1 ratio):
 
 <details>
-<summary><b>Clique pour voir les 86 tests détaillés (Dieharder)</b></summary>
+
+<summary><b>Click to view all 86 detailed test results (Dieharder)</b></summary>
 
 | Test Name | ntuple | tsamples | psamples | p-value | Assessment |
 | :--- | :---: | :---: | :---: | :---: | :---: |
