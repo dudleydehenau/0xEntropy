@@ -14,6 +14,6 @@
 | **R6, R14** | 2 | 1kΩ | — | Résistance traversante 1/4W | R_Axial_DIN0207_P10.16mm |
 | **R10, R15** | 2 | 5.1MΩ | — | Résistance traversante 1/4W | R_Axial_DIN0207_P10.16mm |
 | **RV1, RV2** | 2 | Potentiomètre 10kΩ | Vishay | T93YA103K | Vishay T93YA Vertical |
-| **U1** | 1 | MT3608 (Module Step-Up) | Olimex / Generic | MT3608 | Module Perso:MT3608 |
+| **U1** | 1 | MT3608 (Module Step-Up) | TECNOIOT / Generic | MT3608 | Module Perso:MT3608 |
 | **U2** | 1 | MCP6002-E/P (Ampli Op) | Microchip | MCP6002-E/P | DIP-8 (W7.62mm) |
 | **U3** | 1 | LM393P (Comparateur) | Texas Instruments | LM393P | DIP-8 (W7.62mm) |
