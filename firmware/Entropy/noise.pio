@@ -1,0 +1,27 @@
+.program noise
+
+; Boucle infinie qui lit 1 bit sur la broche configurée et l'envoie dans le registre
+loop:
+    in pins, 1
+    jmp loop
+
+% c-sdk {
+static inline void noise_program_init(PIO pio, uint sm, uint offset, uint pin, float clk_div) {
+    pio_sm_config c = noise_program_get_default_config(offset);
+
+    // Configure la broche en entrée
+    sm_config_set_in_pins(&c, pin);
+    pio_sm_set_consecutive_pindirs(pio, sm, pin, 1, false);
+    pio_gpio_init(pio, pin);
+
+    // Configure le décalage (32 bits avant d'envoyer au processeur)
+    sm_config_set_in_shift(&c, false, true, 32);
+
+    // Vitesse d'exécution
+    sm_config_set_clkdiv(&c, clk_div);
+
+    // Initialise et démarre la machine à états
+    pio_sm_init(pio, sm, offset, &c);
+    pio_sm_set_enabled(pio, sm, true);
+}
+%}

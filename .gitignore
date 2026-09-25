@@ -1,0 +1,51 @@
+# ==================================
+# 1. Backups & Fichiers Temporaires
+# ==================================
+.history/
+_restore_backup_*/
+*-backups/
+*.bak
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*.kicad_prl-bak
+
+# ==================================
+# 2. KiCad & Routage
+# ==================================
+# Préférences d'affichage locales KiCad (grille, zoom, fenêtres)
+*.kicad_prl
+# Verrous temporaires KiCad
+*.lck
+# Fichiers d'échange FreeRouting
+*.dsn
+*.ses
+
+# ==================================
+# 3. Firmware & Compilations
+# ==================================
+# PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# Dossiers de build (C/C++, CMake, Make)
+build/
+bin/
+out/
+*.o
+*.obj
+*.elf
+*.bin
+*.hex
+
+# Arduino
+*.applet
+*.hex
+
+# ==================================
+# 4. IDEs & Système
+# ==================================
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

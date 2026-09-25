@@ -1,0 +1,18 @@
+﻿Designator,Quantity,Value,Footprint,Package,MPN,DNP,Mount_Type,Description,KiLib_Generator
+A2,1,RaspberryPi_Pico,RaspberryPi_Pico_Common_Unspecified,,,,tht,"Versatile and inexpensive microcontroller module powered by RP2040 dual-core Arm Cortex-M0+ processor up to 133 MHz, 264kB SRAM, 2MB QSPI flash; also supports Raspberry Pi Pico 2",
+BZ1,1,Buzzer,Buzzer_12x9.5RM7.6,,,,tht,"Buzzer, polarized",
+"C1, C11, C3, C4, C5, C6, C9",7,100nF,C_Disc_D5.0mm_W2.5mm_P5.00mm,,,,tht,"Unpolarized capacitor, small symbol",capacitor/THT/other
+"C10, C13, C2, C7, C8",5,10µF,CP_Radial_D5.0mm_P2.50mm,,,,tht,"Unpolarized capacitor, small symbol",capacitor/THT/other
+"D1, D2",2,12v,D_DO-35_SOD27_P7.62mm_Horizontal,,,,tht,Zener diode,diode/THT
+J1,1,Conn_01x12_Pin,PinHeader_1x12_P2.54mm_Vertical,,,,tht,"Generic connector, single row, 01x12, script generated",connector/pin_header_socket
+"R1, R7",2,2.2K,R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal,,,,tht,Resistor,resistor/THT
+"R10, R15",2,5.1M,R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal,,,,tht,Resistor,resistor/THT
+"R11, R12, R2, R9",4,10K,R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal,,,,tht,Resistor,resistor/THT
+"R13, R5",2,10k,R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal,,,,tht,Resistor,resistor/THT
+"R14, R6",2,1k,R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal,,,,tht,Resistor,resistor/THT
+"R16, R8",2,2.2k,R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal,,,,tht,Resistor,resistor/THT
+"R3, R4",2,220,R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal,,,,tht,Resistor,resistor/THT
+"RV1, RV2",2,10k,Potentiometer_Vishay_T93YA_Vertical,,,,tht,Trimmable resistor (preset resistor),
+U1,1,MT3608,MT3608,,,,smt,"High Efficiency 1.2MHz 2A Step Up Converter, 2-24V Vin, 28V Vout, 4A current limit, 1.2MHz, SOT23-6",
+U2,1,MCP6002-xP,DIP-8_W7.62mm,,,,tht,"1MHz, Low-Power Op Amp, DIP-8",package/DIP/legacy
+U3,1,LM393,DIP-8_W7.62mm,,,,tht,"Low-Power, Low-Offset Voltage, Dual Comparators, DIP-8/SOIC-8/TO-99-8",package/DIP/legacy
