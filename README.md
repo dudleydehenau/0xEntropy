@@ -154,7 +154,7 @@ dieharder -a -g 201 -f random.bin
 The generator has been rigorously tested and validated for statistical randomness at scale.
 
 - **Observed Throughput**: **~1,300 kbps** (~162 KB/s) continuous stream over USB CDC.
-- **Post-Processing**: SHA-256 cryptographic whitening with a **2:1** hardware compression ratio (512 raw bits consumed per 256 output bits).
+- **Post-Processing**: SHA-256 cryptographic whitening with a default 2:1 hardware compression ratio (512 raw bits per 256 output bits), configurable on-screen to 4:1, 8:1, or 16:1.
 
 ---
 
